@@ -11,15 +11,17 @@
 //===================================================================
 
 // Sort an array of points, required by the convex hull algorithm
-function sortPointX(a,b) { return a.x - b.x; }
-function sortPointY(a,b) { return a.y - b.y; }
+var convex_hull = {
+
+sortPointX: function (a,b) { return a.x - b.x; }
+sortPointY: function (a,b) { return a.y - b.y; }
 
 // isLeft(): tests if a point is Left|On|Right of an infinite line.
 //    Input:  three points P0, P1, and P2
 //    Return: >0 for P2 left of the line through P0 and P1
 //            =0 for P2 on the line
 //            <0 for P2 right of the line
-function isLeft(P0, P1, P2)
+isLeft: function (P0, P1, P2)
 {	 
    return (P1.x - P0.x)*(P2.y - P0.y) - (P2.x - P0.x)*(P1.y - P0.y);
 }
@@ -34,7 +36,7 @@ function isLeft(P0, P1, P2)
 //             n = the number of points in P[]
 //     Output: H[] = an array of the convex hull vertices (max is n)
 //     Return: the number of points in H[]
-function chainHull_2D(P, n, H)
+chainHull_2D :function (P, n, H)
 {
     // the output array H[] will be used as the stack
     var    bot=0, top=(-1);  // indices for bottom and top of the stack
@@ -108,4 +110,5 @@ function chainHull_2D(P, n, H)
         H[++top] = P[minmin];  // push joining endpoint onto stack
 
     return top+1;
+}
 }
