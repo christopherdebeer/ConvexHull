@@ -13,8 +13,8 @@
 // Sort an array of points, required by the convex hull algorithm
 var convex_hull = {
 
-sortPointX: function (a,b) { return a.x - b.x; }
-sortPointY: function (a,b) { return a.y - b.y; }
+sortPointX: function (a,b) { return a.x - b.x; },
+sortPointY: function (a,b) { return a.y - b.y; },
 
 // isLeft(): tests if a point is Left|On|Right of an infinite line.
 //    Input:  three points P0, P1, and P2
@@ -24,7 +24,7 @@ sortPointY: function (a,b) { return a.y - b.y; }
 isLeft: function (P0, P1, P2)
 {	 
    return (P1.x - P0.x)*(P2.y - P0.y) - (P2.x - P0.x)*(P1.y - P0.y);
-}
+},
 //===================================================================
  
 
@@ -69,13 +69,13 @@ chainHull_2D :function (P, n, H)
     while (++i <= maxmin)
     {
         // the lower line joins P[minmin] with P[maxmin]
-        if (isLeft( P[minmin], P[maxmin], P[i]) >= 0 && i < maxmin)
+        if (convex_hull.isLeft( P[minmin], P[maxmin], P[i]) >= 0 && i < maxmin)
             continue;          // ignore P[i] above or on the lower line
 
         while (top > 0)        // there are at least 2 points on the stack
         {
             // test if P[i] is left of the line at the stack top
-            if (isLeft( H[top-1], H[top], P[i]) > 0)
+            if (convex_hull.isLeft( H[top-1], H[top], P[i]) > 0)
                 break;         // P[i] is a new hull vertex
             else
                 top--;         // pop top point off stack
@@ -91,13 +91,13 @@ chainHull_2D :function (P, n, H)
     while (--i >= minmax)
     {
         // the upper line joins P[maxmax] with P[minmax]
-        if (isLeft( P[maxmax], P[minmax], P[i]) >= 0 && i > minmax)
+        if (convex_hull.isLeft( P[maxmax], P[minmax], P[i]) >= 0 && i > minmax)
             continue;          // ignore P[i] below or on the upper line
 
         while (top > bot)    // at least 2 points on the upper stack
         {
             // test if P[i] is left of the line at the stack top
-            if (isLeft( H[top-1], H[top], P[i]) > 0)
+            if (convex_hull.isLeft( H[top-1], H[top], P[i]) > 0)
                 break;         // P[i] is a new hull vertex
             else
                 top--;         // pop top point off stack
